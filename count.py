@@ -1,15 +1,16 @@
-import os
+import torch
+from torch import nn
 
+class LinearModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.weight = nn.parameter(torch.rand(1))
+        self.bias = nn.parameter(torch.rand(1))
 
-def count():
-    dic = {}
-    root = "C:\\Users\\freeman\\Documents\\jinan250"
-    dirs = os.listdir(root)
-    for d in dirs:
-        dic[d] = len(os.listdir(os.path.join(root, d)))
-    print(len(dic))
-    print(dic.values())
+    def forward(self, input):
+        return (input*self.weight)+self.bias
 
-
-if __name__ == '__main__':
-    count()
+if __name__ == "__main__":
+    model = LinearModel()
+    x = torch.tensor(3)
+    y = model(x)
